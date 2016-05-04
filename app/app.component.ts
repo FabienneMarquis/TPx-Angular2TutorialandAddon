@@ -1,5 +1,5 @@
 import {Component}       from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from 'angular2/router';
 
 import {HeroService}     from './hero.service';
 import {HeroesComponent} from './heroes.component';
@@ -38,4 +38,14 @@ import { HeroDetailComponent } from './hero-detail.component';
 
 export class AppComponent {
   title = 'Tour of Heroes';
+
+  constructor(private _router:Router,
+              private _heroService:HeroService) {
+  }
+
+  newHero() {
+    var id = this._heroService.newHero();
+    this._router.navigate(['HeroDetail', {id: id }]);
+
+  }
 }

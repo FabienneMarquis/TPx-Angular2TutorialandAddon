@@ -2,7 +2,7 @@
 <nav>
   <a [routerLink]="['Dashboard']">Dashboard</a>
   <a [routerLink]="['Heroes']">Heroes</a>
-  <a >New</a>
+  <a (click)="newHero()">New</a>
 </nav>
 </div>
 <router-outlet></router-outlet>

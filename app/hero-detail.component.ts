@@ -36,5 +36,6 @@ export class HeroDetailComponent implements OnInit {
     this._heroService.deleteHero(this.hero.id);
     window.history.back();
   }
+
 }
 
