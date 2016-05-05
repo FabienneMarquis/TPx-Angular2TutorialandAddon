@@ -44,8 +44,9 @@ export class AppComponent {
   }
 
   newHero() {
-    var id = this._heroService.newHero();
-    this._router.navigate(['HeroDetail', {id: id }]);
+    this._heroService.save();
+    var idNH = this._heroService.newHero();
+    this._router.navigate(['HeroDetail', {id: idNH }]);
 
   }
 }

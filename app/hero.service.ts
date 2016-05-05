@@ -1,10 +1,9 @@
 /**
  * Created by 1494778 on 2016-04-27.
  */
-import { Injectable } from 'angular2/core';
-
-import { Hero } from './hero';
-import { HEROES} from './mock-heroes';
+import {Injectable} from 'angular2/core';
+import {Hero} from './hero';
+import {HEROES} from './mock-heroes';
 
 @Injectable()
 export class HeroService {
@@ -21,12 +20,12 @@ export class HeroService {
   }
 
   getHeroes() {
-    return Promise.resolve(HEROES);
+    return Promise.resolve(this._heroes);
   }
-  
+
 
   getHero(id: number) {
-    return Promise.resolve(HEROES).then(
+    return Promise.resolve(this._heroes).then(
       heroes => heroes.filter(hero => hero.id === id)[0]
     );
   }
@@ -42,10 +41,10 @@ export class HeroService {
       })),
       newHero = new Hero();
     newHero.id = maxId + 1;
-    newHero.name = "default";
+    newHero.name = "hero"+(maxId+1);
     this._heroes.push(newHero);
     this.save();
-    return newHero.id
+    return newHero.id;
   }
 
   save() {

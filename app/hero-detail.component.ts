@@ -3,7 +3,7 @@
  */
 
 import {Component, Input,  OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
+import {RouteParams, Router} from 'angular2/router';
 
 import {HeroService} from './hero.service';
 import {Hero} from "./hero";
@@ -19,6 +19,7 @@ export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
 
   constructor(
+    private _router:Router,
     private _heroService: HeroService,
     private _routeParams: RouteParams) {
   }
@@ -26,10 +27,17 @@ export class HeroDetailComponent implements OnInit {
   ngOnInit() {
     let id = +this._routeParams.get('id');
     this._heroService.getHero(id)
-      .then(hero => this.hero = hero);
+      .then(hero => this.hero == null?this.errorIdInvalid(id):this.hero = hero);
+
+  }
+
+  errorIdInvalid(id){
+    console.warn(id+": Id Inexistant");
+    this._router.navigate(['Heroes']);
   }
 
   goBack() {
+    this._heroService.save();
     window.history.back();
   }
   delete(){
